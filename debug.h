@@ -17,29 +17,46 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#ifndef RCRECEIVER_DEBUG_H_
+#define RCRECEIVER_DEBUG_H_
+
+
 // Program im Debugmodus kompilieren, dann werden zus. Ausgaben auf die serielle Schnittstelle geschrieben.
 // Zum aktivieren der Debug Funktion bitte den Define VOR dem #include "debug.h" in die Hauptdatei eintragen.
 //#define debug
 
 #ifdef debug
-#define dbgOut(S) \
-Serial.print(S); 
-#define dbgOut2(S,P) \
-Serial.print(S,P); 
-#define dbgOutLn(S) \
-Serial.println(S); 
-#define dbgOutLn2(S,P) \
-Serial.println(S,P); 
-#define initDebug() \
-  Serial.begin(57600); \
-  Serial.flush(); \
-  delay(100);
-#else
-#define dbgOut(S)
-#define dbgOut2(S,P)
-#define dbgOutLn(S)
-#define dbgOutLn2(S,P)
-#define initDebug()
+
+#if !defined(DEBUG_SERIAL_BAUDRATE)
+#define DEBUG_SERIAL_BAUDRATE (57600)
 #endif
 
+#define dbgOut(S)															\
+		Serial.print(S);
 
+#define dbgOut2(S, P)														\
+		Serial.print(S, P);
+
+#define dbgOutLn(S)															\
+		Serial.println(S);
+
+#define dbgOutLn2(S, P)														\
+		Serial.println(S, P);
+
+#define initDebug()															\
+		Serial.begin(DEBUG_SERIAL_BAUDRATE);								\
+		Serial.flush();														\
+		delay(100);
+
+#else	/* debug */
+
+#define dbgOut(S)
+#define dbgOut2(S, P)
+#define dbgOutLn(S)
+#define dbgOutLn2(S, P)
+#define initDebug()
+
+#endif	/* !debug */
+
+
+#endif	/* !RCRECEIVER_DEBUG_H_ */

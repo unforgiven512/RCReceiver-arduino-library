@@ -17,13 +17,24 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#ifndef RCRECEIVER_MAKROS_H_
+#define RCRECEIVER_MAKROS_H_
+
+
 #ifndef between
-#define between(a,x,y) ((a >=x) && (a <= y))
+#define between(a, x, y)													\
+		(((a) >= (x)) && ((a) <= (y)))
 #endif
 
 #ifndef cbi
-#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
+#define cbi(sfr, bit)														\
+		(_SFR_BYTE(sfr) &= ~(_BV(bit)))
 #endif
+
 #ifndef sbi
-#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
+#define sbi(sfr, bit)														\
+		(_SFR_BYTE(sfr) |= _BV(bit))
 #endif
+
+
+#endif	/* !RCRECEIVER_MAKROS_H_ */
